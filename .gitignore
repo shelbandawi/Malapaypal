@@ -1,0 +1,76 @@
+############################
+# OS junk
+############################
+.DS_Store
+Thumbs.db
+desktop.ini
+
+############################
+# Root logs & temp
+############################
+*.log
+logs/
+tmp/
+temp/
+
+############################
+# IDE / Editor
+############################
+.vscode/
+.idea/
+*.sw?
+*.swo
+*.swp
+
+############################
+# Frontend (React + Vite)
+############################
+/frontend/node_modules/
+/frontend/.vite/
+/frontend/dist/
+/frontend/.env
+/frontend/*.local
+/frontend/npm-debug.log*
+/frontend/yarn-error.log
+/frontend/pnpm-debug.log
+
+############################
+# Backend (Laravel)
+############################
+/backend/vendor/
+/backend/node_modules/
+/backend/.env
+/backend/.env.*
+!/backend/.env.example
+/backend/storage/*
+!/backend/storage/app/
+!/backend/storage/app/public/
+!/backend/storage/framework/
+!/backend/storage/framework/cache/
+!/backend/storage/framework/sessions/
+!/backend/storage/framework/testing/
+!/backend/storage/framework/views/
+!/backend/storage/logs/
+!/backend/bootstrap/cache/
+# Laravel caches & results
+/backend/.phpunit.result.cache
+/backend/.php-cs-fixer.cache
+
+# Keep composer.lock in repo for reproducible builds (so do NOT ignore it)
+
+############################
+# Docker & local data
+############################
+/docker/*.env
+/docker/*.log
+/docker-data/
+/**/postgres-data/
+/**/pgdata/
+/**/*.pid
+
+############################
+# Misc
+############################
+*.pid
+*.seed
+*.backup

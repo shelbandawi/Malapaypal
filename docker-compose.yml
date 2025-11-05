@@ -1,0 +1,63 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: malapaypal-backend
+    ports:
+      - "8000:8000" # Laravel dev server
+    env_file:
+      - ./backend/.env
+    volumes:
+      - ./backend:/var/www/html
+      - backend_vendor:/var/www/html/vendor
+      - backend_storage:/var/www/html/storage
+    depends_on:
+      - db
+    networks:
+      - malapaypal_net
+    # Placeholder command until we add Dockerfile and app
+    command: ["sh", "-c", "sleep infinity"]
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: malapaypal-frontend
+    ports:
+      - "3000:3000" # Vite dev server
+    env_file:
+      - ./frontend/.env
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    networks:
+      - malapaypal_net
+    # Placeholder command until we add Dockerfile and app
+    command: ["sh", "-c", "sleep infinity"]
+
+  db:
+    image: postgres:15
+    container_name: malapaypal-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: malapaypal
+      POSTGRES_USER: malapaypal_user
+      POSTGRES_PASSWORD: change_me_in_env
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - malapaypal_net
+
+volumes:
+  db_data:
+  backend_vendor:
+  backend_storage:
+
+networks:
+  malapaypal_net:
+    driver: bridge
